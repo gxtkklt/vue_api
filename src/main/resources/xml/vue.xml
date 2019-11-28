@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="cn.ts.mapper.VueMapper">
+
+    <select id="queryCount" parameterType="java.util.Map" resultType="int">
+        select count(*) from t_shop_log
+    </select>
+
+    <select id="queryList" parameterType="java.util.Map" resultType="java.util.Map">
+        select * from t_shop_log
+
+        limit #{stateIndex},#{pageSize}
+    </select>
+
+    <insert id="add" parameterType="cn.ts.po.ShopLog">
+        insert into t_shop_log (userName,status,createDate,paramContent,info,action) values
+          (#{userName},#{status},#{createDate},#{paramContent},#{info},#{action})
+    </insert>
+
+    <delete id="delete" parameterType="int">
+        delete from t_shop_log where id = #{id}
+    </delete>
+
+    <update id="update" parameterType="cn.ts.po.ShopLog">
+        update t_shop_log set userName=#{userName},status=#{status},createDate=#{createDate},
+          paramContent=#{paramContent},info=#{info},action=#{action}
+          where id=#{id}
+    </update>
+</mapper>
